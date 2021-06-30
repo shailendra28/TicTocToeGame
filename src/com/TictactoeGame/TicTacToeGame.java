@@ -9,13 +9,13 @@ public class TicTacToeGame {
      * created a board of size 10
      */
     private static final Scanner SCANNER = new Scanner(System.in);
-    private char board[] = new char[10];
-    private char usersymbol, computersymbol;
-    private int player = 0;
-    private char emptyspace = ' ';
+    private static char board[] = new char[10];
+    private static char usersymbol, computersymbol;
+    private static int player,index = 0;
+    private static char emptyspace = ' ';
     TicTacToeGame() {
         /**
-         * Inside the constructor am calling createboard method.
+         * inside the constructor am calling createboard method.
          * making toss to start play---it'll decide who will play first.
          * calling takeUserInput method
          */
@@ -28,7 +28,7 @@ public class TicTacToeGame {
      * it will iterate this forloop from 1 to 10.
      * Board valus assigned empty space.
      */
-    private void createBoard() {
+    private static void createBoard() {
         for (int count = 1; count < 10; count++) {
             board[count] = ' ';
         }
@@ -37,7 +37,7 @@ public class TicTacToeGame {
      * It'll take user input 'x' and '0'.
      * Compare those to assign the values whether it's computersymbol or usersymbol.
      */
-    private void takeUserInput() {
+    private static void takeUserInput() {
         System.out.println("Your turn:(Choose x or o) ");
         String symbol = SCANNER.next();
         if (symbol.equals("x")) {
@@ -54,7 +54,7 @@ public class TicTacToeGame {
      * This showBoard method is showing the empty board of 3*3 matrices.
      * inside this board it'll take the board values assigned empty space.
      */
-    private void showBoard() {
+    private static void showBoard() {
         String horizontalPart = "+---+---+---+";
         for (int row = 0; row < 3; row++) {
             System.out.println(horizontalPart);
@@ -70,13 +70,17 @@ public class TicTacToeGame {
      * This makeMove method will take user input from 1 to 9 place your move on the given input.
      * if player==0 then it'll assign the value as given by computer.
      */
-    public boolean makeMove(int index, int player) {
-        if (board[index] == ' ') {
+    public static boolean makeMove(int index, int player) {
+        if (board[index] == emptyspace) {
             if (player == 0) {
                 System.out.println("Computer played: ");
-                board[index] = computersymbol;
+                for (int i=0;i<3;i++){
+                    board[index] = computersymbol;
+                }
+                blockOpponent();
             } else {
                 System.out.println("Player played: ");
+                cornorAvailability();
                 board[index] = usersymbol;
             }
             showBoard();
@@ -89,7 +93,7 @@ public class TicTacToeGame {
     /**
      * This tossForFirstPlay method will get the input from user and check whether it's a head or tail by using random function
      */
-    public void tossForFirstPlay() {
+    public static void tossForFirstPlay() {
         int player;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Toss (H or T):");
@@ -103,30 +107,29 @@ public class TicTacToeGame {
             player = 0;
         }
     }
-    public void playGame() {
-        int index;
+    public static void playGame() {
         for (index = 0; index < 9; index++) {
             if (player == 0) {
                 computerPlay();
                 player = 1;
             } else {
                 checkUserCanWin();
+                cornorAvailability();
                 System.out.println("Select Position (1-9): ");
                 while (makeMove(SCANNER.nextInt(), player)) {
                     System.out.println("Try different place.");
                 }
                 player = 0;
             }
-        }
-        if (index == 9) {
-            System.out.println("Game Draw!");
-            System.exit(0);
+            if (index == 9) {
+                System.out.println("Game Draw!");
+                System.exit(0);}
         }
     }
     /**
      * This checkWin method will check all the possible winning chances...
      */
-    public void checkWin() {
+    public static void checkWin() {
         if ((board[1] == usersymbol && board[2] == usersymbol && board[3] == usersymbol) ||
                 (board[4] == usersymbol && board[5] == usersymbol && board[6] == usersymbol) ||
                 (board[7] == usersymbol && board[8] == usersymbol && board[9] == usersymbol) ||
@@ -150,9 +153,12 @@ public class TicTacToeGame {
             System.exit(0);
         }
     }
-    private void computerPlay() {
+    private static void computerPlay() {
         // TODO: Implementation computer playing logic
         while (makeMove((int) (Math.random() * 8) + 1, 0)) {
+            if (index == 9) {
+                System.out.println("Game Draw!");
+                System.exit(0);}
             System.out.println("");
         }
     }
@@ -160,7 +166,7 @@ public class TicTacToeGame {
      * This checkusercanwin will fetch all possibilities.
      * then conclude the result as player can win from computer
      */
-    private void checkUserCanWin() {
+    private static void checkUserCanWin() {
         if ((board[1] == usersymbol && board[2] == usersymbol && board[3] == emptyspace) ||
                 (board[4] == usersymbol && board[5] == usersymbol && board[6] == emptyspace) ||
                 (board[7] == usersymbol && board[8] == usersymbol && board[9] == emptyspace) ||
@@ -187,8 +193,9 @@ public class TicTacToeGame {
                 (board[3] == usersymbol && board[5] == emptyspace && board[7] == usersymbol)){
             System.out.println("Player can Win! from Computer");
         }
+
     }
-    private void blockOpponent(){   //  Ability to block the oponent
+    private static void blockOpponent(){  // Block Oponent
         if(board[1] == usersymbol && board[2] == usersymbol){
             board[3]=computersymbol;
         }
@@ -260,6 +267,21 @@ public class TicTacToeGame {
         }
         if (board[9] == usersymbol && board[3] == usersymbol){
             board[6]=computersymbol;
+        }
+    }
+    /**
+     * Added cornor availability method to check the cornors are avilable or not.
+     * if available the the position will move towards cornor at the end.
+     */
+    public static void cornorAvailability() {
+        if (board[1] == emptyspace) {
+            System.out.println("select 1st position --Cornor is available");
+        } else if (board[3] == emptyspace) {
+            System.out.println("select 3rd position -- Cornor is available");
+        } else if (board[7] == emptyspace) {
+            System.out.println("select 7th position -- Cornor is available");
+        } else if (board[9] == emptyspace) {
+            System.out.println("select 9th position -- Cornor is available");
         }
     }
     /**
