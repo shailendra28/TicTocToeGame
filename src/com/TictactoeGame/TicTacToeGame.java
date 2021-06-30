@@ -284,6 +284,14 @@ public class TicTacToeGame {
             System.out.println("select 9th position -- Cornor is available");
         }
     }
+    public static void centerAvailability(){  // Checking Center positionh
+        if(board[5] == emptyspace){
+            System.out.println("Center position is available");
+        }else{
+            System.out.println("Center position is not available..Try another position");
+        }
+
+    }
     /**
      * Here I have created a main method to execute the program.
      * an object got created named tictactoe.which called the following methods.
