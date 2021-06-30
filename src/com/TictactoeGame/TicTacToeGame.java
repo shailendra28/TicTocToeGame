@@ -7,7 +7,6 @@ public class TicTacToeGame {
     private char board[]=new char[10]; //created a tictactoe board of size 10
     private String usersymbol,computersymbol;
     TicTacToeGame(){
-
         createboard(); //inside the constructor am calling createboard method
         takeUserInput();//inside the constructor am calling takeUserInput method
     }
@@ -26,11 +25,27 @@ public class TicTacToeGame {
         }else if (symbol=="o"){
             usersymbol="o";
             computersymbol="x";
+            System.exit(0);
         }else{
             System.out.println("invalid option");
         }
     }
+    public void showBoard(){   //Showing Board
+        String horizontalPart = "+---";
+        String verticalPart = "|   ";
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(horizontalPart);
+            }
+            System.out.print("+\n");
+            for (int j = 0; j < 3; j++) {
+                System.out.print(verticalPart);
+            }
+            System.out.print("+\n");
+        }
+    }
     public static void main(String[]args){
         TicTacToeGame tictactoe=new TicTacToeGame(); //created object for class TicTacToeGame.
+        tictactoe.showBoard();
     }
 }
