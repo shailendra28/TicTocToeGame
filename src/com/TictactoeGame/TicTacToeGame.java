@@ -188,6 +188,80 @@ public class TicTacToeGame {
             System.out.println("Player can Win! from Computer");
         }
     }
+    private void blockOpponent(){   //  Ability to block the oponent
+        if(board[1] == usersymbol && board[2] == usersymbol){
+            board[3]=computersymbol;
+        }
+        if(board[9] == usersymbol && board[6] == usersymbol){
+            board[3]=computersymbol;
+        }
+        if(board[7] == usersymbol && board[5] == usersymbol){
+            board[3]=computersymbol;
+        }
+        if(board[3] == usersymbol && board[2] == usersymbol){
+            board[1]=computersymbol;
+        }
+        if(board[9] == usersymbol && board[5] == usersymbol){
+            board[1]=computersymbol;
+        }
+        if(board[7] == usersymbol && board[4] == usersymbol){
+            board[1]=computersymbol;
+        }
+        if(board[3] == usersymbol && board[1] == usersymbol){
+            board[2]=computersymbol;
+        }
+        if (board[8] == usersymbol && board[5] == usersymbol){
+            board[2]=computersymbol;
+        }
+        if (board[1] == usersymbol && board[4] == usersymbol){
+            board[7]=computersymbol;
+        }
+        if(board[3] == usersymbol && board[5] == usersymbol){
+            board[7]=computersymbol;
+        }
+        if(board[8] == usersymbol && board[9] == usersymbol){
+            board[7]=computersymbol;
+        }
+        if(board[1] == usersymbol && board[5] == usersymbol){
+            board[9]=computersymbol;
+        }
+        if(board[3] == usersymbol && board[6] == usersymbol){
+            board[9]=computersymbol;
+        }
+        if(board[7] == usersymbol && board[8] == usersymbol){
+            board[9]=computersymbol;
+        }
+        if(board[5] == usersymbol && board[2] == usersymbol){
+            board[8]=computersymbol;
+        }
+        if(board[9] == usersymbol && board[7] == usersymbol){
+            board[8]=computersymbol;
+        }
+        if(board[5] == usersymbol && board[6] == usersymbol){
+            board[4]=computersymbol;
+        }
+        if (board[1] == usersymbol && board[7] == usersymbol){
+            board[4]=computersymbol;
+        }
+        if(board[1] == usersymbol && board[9] == usersymbol){
+            board[5]=computersymbol;
+        }
+        if(board[3] == usersymbol && board[7] == usersymbol){
+            board[5]=computersymbol;
+        }
+        if(board[2] == usersymbol && board[8] == usersymbol){
+            board[5]=computersymbol;
+        }
+        if(board[4] == usersymbol && board[6] == usersymbol){
+            board[5]=computersymbol;
+        }
+        if(board[5] == usersymbol && board[4] == usersymbol){
+            board[6]=computersymbol;
+        }
+        if (board[9] == usersymbol && board[3] == usersymbol){
+            board[6]=computersymbol;
+        }
+    }
     /**
      * Here I have created a main method to execute the program.
      * an object got created named tictactoe.which called the following methods.
